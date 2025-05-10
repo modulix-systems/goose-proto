@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package "auth.v1";
+
+import "users/v1/user.proto";
+import "google/protobuf/empty.proto";
+
+service AuthService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse);
+  rpc SendOTP(SendOTPRequest) returns (google.protobuf.Empty);
+  rpc SignIn(SignInRequest) returns (SignInResponse);
+}
+
+message SignUpRequest {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  optional string first_name = 4;
+  optional string last_name = 5;
+  string phone_number = 6;
+  optional string photo_url = 7;
+  optional string about_me = 12;
+  optional google.protobuf.Timestamp birth_date = 14;
+  string otp = 15;
+}
+
+message SignUpResponse {
+  users.v1.User user = 1;
+  string token = 2;
+}
+
+message SendOTPRequest { string email = 1; }
+
+message SignInRequest {
+  string login = 1; // can be email or username
+  string password = 2;
+}
+
+message SignInResponse { string token = 1; }
