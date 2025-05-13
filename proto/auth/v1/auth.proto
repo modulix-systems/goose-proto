@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package auth.v1;
 
-import "users/v1/user.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "users/v1/user.proto";
 
 service AuthService {
   rpc SignUp(SignUpRequest) returns (SignUpResponse);
@@ -30,7 +30,9 @@ message SignUpResponse {
   string token = 2;
 }
 
-message SendOTPRequest { string email = 1; }
+message SendOTPRequest {
+  string email = 1;
+}
 
 message SignInRequest {
   // login can be email or username
@@ -38,4 +40,6 @@ message SignInRequest {
   string password = 2;
 }
 
-message SignInResponse { string token = 1; }
+message SignInResponse {
+  string token = 1;
+}
