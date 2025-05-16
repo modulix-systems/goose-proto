@@ -8,7 +8,7 @@ import "users/v1/user.proto";
 
 service AuthService {
   rpc SignUp(SignUpRequest) returns (SignUpResponse);
-  rpc SendOTP(SendOTPRequest) returns (google.protobuf.Empty);
+  rpc ConfirmEmail(ConfirmEmailRequest) returns (google.protobuf.Empty);
   rpc SignIn(SignInRequest) returns (SignInResponse);
 }
 
@@ -22,7 +22,7 @@ message SignUpRequest {
   optional string photo_url = 7;
   optional string about_me = 12;
   optional google.protobuf.Timestamp birth_date = 14;
-  string otp = 15;
+  string ConfirmationCode = 15;
 }
 
 message SignUpResponse {
@@ -30,9 +30,7 @@ message SignUpResponse {
   string token = 2;
 }
 
-message SendOTPRequest {
-  string email = 1;
-}
+message ConfirmEmailRequest { string email = 1; }
 
 message SignInRequest {
   // login can be email or username
@@ -40,6 +38,4 @@ message SignInRequest {
   string password = 2;
 }
 
-message SignInResponse {
-  string token = 1;
-}
+message SignInResponse { string token = 1; }
